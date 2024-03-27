@@ -167,7 +167,7 @@ def WinRegistryReadValue(Root, SubKey: str, ValueName: str, ExpectValueType: int
     if type(ExpectValueType) == int and ValueType != ExpectValueType:
         raise TypeError('Expect %d, but %d is given.' % (ExpectValueType, ValueType))
     return Value
-
+print(len(sys.argv))
 if len(sys.argv) == 2:
     cipher = MobaXtermCryptoSafe(
         sys.argv[1].encode('ansi')
@@ -208,8 +208,10 @@ try:
             print('[*] Password: %s' % CredentialPassword)
             print('')
         except OSError:
+            print("oserror")
             break
 except FileNotFoundError:
+    print(r"FileNotFoundError:Software\\Mobatek\\MobaXterm\\C")
     pass
 
 try:
@@ -228,8 +230,8 @@ try:
             
             ConnPassword = cipher.DecryptPassword(
                 Value, 
-                ConnHostname.encode('ansi'), 
-                ConnUsername.encode('ansi')
+                # ConnHostname.encode('ansi'),
+                # ConnUsername.encode('ansi')
             ).decode('ansi')
 
             print('[*] Name:     %s' % ValueName)
